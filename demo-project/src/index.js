@@ -3,49 +3,102 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-class Employee extends React.Component{
+class CountCharacters extends React.Component{
   constructor(props){
     super(props);
-    console.log(this.props);
+    this.state={
+      message:''
+    };
   }
-  render(){
-    return <div>
-      <h2>Employee Details...</h2>
-      <p>
-        <label>Employee ID : <b>{this.props.Id}</b></label>
-      </p>
-      <p>
-        <label>Employee Name : <b>{this.props.Name}</b></label>
-      </p>
-      <p>
-        <label>Employee Location : <b>{this.props.Location}</b></label>
-      </p>
-      <p>
-        <label>Employee Salary : <b>{this.props.Salary}</b></label>
-      </p>
-      <Department DeptName={this.props.DeptName} HeadName={this.props.HeadName}></Department>
-    </div>
-  }
-}
 
-class Department extends React.Component{
+  onMessageChange(text){
+    this.setState({
+      message:'Message has '+text.length+' number on Characters'
+    });
+  }
+  
   render(){
     return <div>
-      <h2>Department Details...</h2>
+      <h2>Welcome to Count Characters Component...</h2>
       <p>
-        <label>Dept Name : <b>{this.props.DeptName}</b></label>
+        <label>Enter Message : <input type="text" onChange={e=>this.onMessageChange(e.target.value)}></input></label>
       </p>
       <p>
-        <label>Head Name : <b>{this.props.HeadName}</b></label>
+        <label>{this.state.message}</label>
       </p>
     </div>
   }
 }
 
-const element=<Employee Id="101" Name="Kermo" Location="Tallinn" Salary="4000" DeptName="Dev" HeadName="Kermo Tech"></Employee>
+class Employee extends React.Component{
+  state={counter:0};
+  addEmployee=()=>{
+    this.setState({counter:this.state.counter+1});
+    // this.counter=this.counter+1;
+    // alert("Adding a New Employee");
+    // alert('Add Employee Button is Clicked ' + this.counter+' times');
+  }
+  render(){
+    return <div>
+      <h2>Welcome to Employee Component...</h2>
+      <p>
+        <button onClick={this.addEmployee}>Add Employee</button>
+      </p>
+      <p>
+        <label>Add Employee Button is Clicked : <b>{this.state.counter}</b> times</label>
+      </p>
+    </div>
+  }
+}
+
+const element=<CountCharacters></CountCharacters>
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(element);
+
+// class Employee extends React.Component{
+//   constructor(props){
+//     super(props);
+//     console.log(this.props);
+//   }
+//   render(){
+//     return <div>
+//       <h2>Employee Details...</h2>
+//       <p>
+//         <label>Employee ID : <b>{this.props.Id}</b></label>
+//       </p>
+//       <p>
+//         <label>Employee Name : <b>{this.props.Name}</b></label>
+//       </p>
+//       <p>
+//         <label>Employee Location : <b>{this.props.Location}</b></label>
+//       </p>
+//       <p>
+//         <label>Employee Salary : <b>{this.props.Salary}</b></label>
+//       </p>
+//       <Department DeptName={this.props.DeptName} HeadName={this.props.HeadName}></Department>
+//     </div>
+//   }
+// }
+
+// class Department extends React.Component{
+//   render(){
+//     return <div>
+//       <h2>Department Details...</h2>
+//       <p>
+//         <label>Dept Name : <b>{this.props.DeptName}</b></label>
+//       </p>
+//       <p>
+//         <label>Head Name : <b>{this.props.HeadName}</b></label>
+//       </p>
+//     </div>
+//   }
+// }
+
+// const element=<Employee Id="101" Name="Kermo" Location="Tallinn" Salary="4000" DeptName="Dev" HeadName="Kermo Tech"></Employee>
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(element);
 
 // var DisplayEmployeeInfo=(employee)=>{
 //   return <div>
